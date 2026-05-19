@@ -1,0 +1,8 @@
+Neu gia tri ki vong la 999 (co tinh sai)
+
+Error:  Failures:
+Error:    OrderServiceTest.testCalculateDiscountForPremium:12 Khách hàng VIP phải được giảm đúng 10% ==> expected: <999.0> but was: <100.0>
+[INFO]
+Error:  Tests run: 4, Failures: 1, Errors: 0, Skipped: 0
+
+Neu gia tri ki vong la 100 (chinh xac)

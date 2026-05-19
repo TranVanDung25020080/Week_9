@@ -9,7 +9,7 @@ public class OrderServiceTest {
     void testCalculateDiscountForPremium() {
         OrderService orderService = new OrderService();
         double discount = orderService.calculateDiscount(1000, true);
-        assertEquals(999.0, discount, "Khách hàng VIP phải được giảm đúng 10%");
+        assertEquals(100.0, discount, "Khách hàng VIP phải được giảm đúng 10%");
     }
 
     @Test
