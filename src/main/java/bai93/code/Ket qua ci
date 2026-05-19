@@ -1,8 +1,16 @@
-Neu gia tri ki vong la 999 (co tinh sai)
+## Neu gia tri ki vong la 999 (co tinh sai)
 
 Error:  Failures:
 Error:    OrderServiceTest.testCalculateDiscountForPremium:12 Khách hàng VIP phải được giảm đúng 10% ==> expected: <999.0> but was: <100.0>
 [INFO]
 Error:  Tests run: 4, Failures: 1, Errors: 0, Skipped: 0
 
-Neu gia tri ki vong la 100 (chinh xac)
+## Neu gia tri ki vong la 100 (chinh xac)
+
+[INFO] Building jar: /home/runner/work/Week_9/Week_9/target/Week_9-1.0-SNAPSHOT.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  10.964 s
+[INFO] Finished at: 2026-05-19T16:19:06Z
+[INFO] ------------------------------------------------------------------------
