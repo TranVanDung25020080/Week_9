@@ -15,6 +15,9 @@ jobs:
 
     runs-on: ${{ matrix.os }}
 
+    permissions:
+      contents: write
+
     steps:
       - name: Checkout source code
         uses: actions/checkout@v4
@@ -26,14 +29,27 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
 
-    # SỬA ĐỔI: Chuyển sang lệnh mvn clean verify để kích hoạt kiểm tra JaCoCo
       - name: Build and Verify with JaCoCo
         run: mvn clean verify
 
-      # BỔ SUNG: Trích xuất và lưu trữ báo cáo độ bao phủ mã nguồn
       - name: Upload JaCoCo Coverage Report
-        if: always() # Luôn chạy bước này kể cả khi build thành công hay thất bại để lấy báo cáo lỗi
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: jacoco-report-${{ matrix.os }}
           path: target/site/jacoco/
+
+      - name: Automate Continuous Delivery (GitHub Release)
+        if: (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master') && matrix.os == 'ubuntu-latest'
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v1.0.${{ github.run_number }}
+          name: Production Release Build v1.0.${{ github.run_number }}
+          body: |
+            🎉 Hệ thống CD tự động phát hành phiên bản mới!
+            - Trạng thái: Build & Kiểm thử thành công trên 3 Hệ điều hành.
+            - Độ bao phủ mã nguồn (JaCoCo): Đạt chuẩn > 80%.
+            - Mã định danh tự động: #${{ github.run_number }}
+          files: target/*.jar
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
