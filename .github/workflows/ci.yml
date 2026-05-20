@@ -31,6 +31,8 @@ jobs:
 
       - name: Build and Verify with JaCoCo
         run: mvn clean verify
+        env:
+          DATABASE_SECRET_KEY: ${{ secrets.APP_DB_CONN }}
 
       - name: Upload JaCoCo Coverage Report
         if: always()
