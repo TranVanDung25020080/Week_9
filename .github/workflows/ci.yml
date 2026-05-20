@@ -8,12 +8,11 @@ on:
 
 jobs:
   build:
-    # Kích hoạt Matrix Strategy để chạy đồng thời trên 3 hệ điều hành
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
 
-    # Máy ảo sẽ thay đổi linh hoạt theo từng luồng trong ma trận
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -26,12 +25,14 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Build and Test with Maven
-        run: mvn clean package
+    # SỬA ĐỔI: Chuyển sang lệnh mvn clean verify để kích hoạt kiểm tra JaCoCo
+      - name: Build and Verify with JaCoCo
+        run: mvn clean verify
 
-      - name: Upload Build Artifact
+      # BỔ SUNG: Trích xuất và lưu trữ báo cáo độ bao phủ mã nguồn
+      - name: Upload JaCoCo Coverage Report
+        if: always() # Luôn chạy bước này kể cả khi build thành công hay thất bại để lấy báo cáo lỗi
         uses: actions/upload-artifact@v4
         with:
-          # Tách biệt tên file jar thành phẩm theo từng hệ điều hành để tránh ghi đè
-          name: order-service-${{ matrix.os }}
-          path: target/*.jar
+          name: jacoco-report-${{ matrix.os }}
+          path: target/site/jacoco/
