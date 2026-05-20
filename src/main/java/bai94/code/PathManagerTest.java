@@ -1,5 +1,6 @@
 package bai94.code;
 
+import java.io.File;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -10,7 +11,8 @@ public class PathManagerTest {
         PathManager manager = new PathManager();
         String result = manager.getConfigFile("config", "settings.json");
 
-        // CỐ TÌNH ĐỊNH DẠNG CỨNG dấu gạch chéo ngược '\\' của Windows
-        assertEquals("config\\settings.json", result);
+        String expectedPath = "config" + File.separator + "settings.json";
+
+        assertEquals(expectedPath, result, "Đường dẫn phải tương thích với hệ điều hành đang chạy");
     }
 }
