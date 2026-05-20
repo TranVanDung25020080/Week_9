@@ -24,6 +24,7 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+          cache: 'maven'
 
     # SỬA ĐỔI: Chuyển sang lệnh mvn clean verify để kích hoạt kiểm tra JaCoCo
       - name: Build and Verify with JaCoCo
